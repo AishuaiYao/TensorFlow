@@ -2,7 +2,7 @@ import os
 import tensorflow as tf
 import mobilenet_v2
 import numpy as np
-
+import tqdm
 
 
 tf.reset_default_graph()
