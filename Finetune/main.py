@@ -87,7 +87,7 @@ if __name__ == "__main__":
     my_model = "../models/my_model.ckpt"
 
     EPOCHS = 2
-    BATCH_SIZE = 16
+    BATCH_SIZE = 8
     DATASETS = 1000
     CLASSES = 5
     learning_rate = 1e-2
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     mynet = MyNet(TARGET_TENSOR, CLASSES)
     mynet.net()
 
-
+    import temp
     restore_vars = get_restore_vars(TARGET_TENSOR)
     train_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=mynet.finetune_scope)
 
@@ -123,5 +123,9 @@ if __name__ == "__main__":
                 end = min(start + BATCH_SIZE, x_train.shape[0])
                 _, losses = sess.run([train_step, loss], feed_dict={mynet.inputs: x_train[start:end], label: y_train[start:end]})
                 print('iters:', j, '\t', 'losses:', losses.mean(axis = 0))
+
+
+
+
 
         saver.save(sess,my_model)
